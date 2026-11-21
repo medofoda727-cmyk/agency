@@ -1,8 +1,11 @@
-import numpy as np
+"""Mix an episode: voice on top, music ducked by a voice-driven sidechain, SFX by RMS.
+usage: python3 kit/mix.py <episodeDir>   (reads vo/vo.wav, sfx.wav, music.wav → mix.wav)"""
+import numpy as np, sys, os
 from scipy.io import wavfile
 from scipy import signal
 SR=48000
-_,vo=wavfile.read('../vo/vo.wav'); vo=vo.astype(np.float32); vo/=32768 if vo.dtype!=np.float32 and np.abs(vo).max()>2 else 1
+os.chdir(sys.argv[1] if len(sys.argv)>1 else '.')
+_,vo=wavfile.read('vo/vo.wav'); vo=vo.astype(np.float32); vo/=32768 if vo.dtype!=np.float32 and np.abs(vo).max()>2 else 1
 if np.abs(vo).max()>2: vo/=32768
 _,sfx=wavfile.read('sfx.wav'); _,mus=wavfile.read('music.wav')
 N=len(sfx); v=np.zeros(N); v[:min(N,len(vo))]=vo[:N]

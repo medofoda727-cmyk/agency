@@ -1,11 +1,7 @@
 // ─────────────────────────────────────────────────────────────
-//  FILM — timeline (seconds on the trimmed VO), shared systems
+//  CORE — scene registry, render loop, shared story systems
+//  (episode files define T[], DUR and call scene(a, b, fn))
 // ─────────────────────────────────────────────────────────────
-// VO line starts (from vo/timing.json, aligned to pauses)
-const T = [0, 2.35, 10.39, 12.94, 16.32, 17.40, 22.15, 34.73, 36.13, 37.71, 39.71, 47.07, 52.73, 57.42, 59.25, 68.81, 73.57, 75.74, 79.39, 84.87, 87.25, 96.95, 99.53, 110.76, 123.28, 125.69, 130.06, 134.81, 139.2];
-const DUR = 143.0;
-const wt = (i, f) => T[i] + (T[i + 1] - T[i]) * f;
-
 const SCENES = []; // {a,b,fn}
 function scene(a, b, fn) { SCENES.push({ a, b, fn }); }
 

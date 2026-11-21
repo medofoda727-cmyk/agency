@@ -2,18 +2,6 @@
 //  ACT II — DIY marketing · no direction · chaos · the price wall
 //  (16.32 → 68.81s)
 // ─────────────────────────────────────────────────────────────
-function scribble(x, y, w, h, seed, p = 1, col = C.graphite, lw = 4) {
-  const r = rng(seed), pts = [];
-  for (let i = 0; i < 26; i++) pts.push([x - w / 2 + (i / 25) * w + (r() - .5) * 20, y + (r() - .5) * h]);
-  sketchPath(pts, p, { width: lw, color: col, seed, wobble: 3, passes: 1 });
-}
-function sofaIcon(o) { sofa(0, 40, { s: .38, sketch: o.sketch }); }
-function chairIcon(o) { armchair(0, 50, { s: .5, sketch: o.sketch }); }
-function lampIcon(o) { floorLamp(0, 80, { s: .32, sketch: o.sketch, on: 1 }); }
-function pctIcon() { txt('%', 0, 6, { size: 120, font: 'Inter Tight', weight: 900, color: '#fff', dir: 'ltr' }); }
-function priceIcon() { txt('1999', 0, 6, { size: 70, font: 'Inter Tight', weight: 900, color: '#fff', dir: 'ltr' }); }
-function qIcon() { txt('?', 0, 8, { size: 130, font: 'Inter Tight', weight: 900, color: '#fff', dir: 'ltr' }); }
-
 // ── SC4: he does it himself (16.32 → 22.15) ─────────────────
 scene(16.32, 22.45, (t) => {
   const iris = E.inOutC(seg(t, 16.32, 16.75));

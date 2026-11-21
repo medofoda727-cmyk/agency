@@ -41,8 +41,9 @@ yarn-error.log*
 next-env.d.ts
 
 # video production intermediates
-/video/build/frames/
-/video/build/node_modules/
-/video/build/*.wav
-/video/build/*.log
-/video/build/ffmpeg2pass*
+/video/kit/node_modules/
+/video/episodes/*/frames/
+/video/episodes/*/.page.html
+/video/episodes/*/*.wav
+/video/episodes/*/.x264*
+__pycache__/

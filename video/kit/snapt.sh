@@ -1,8 +1,8 @@
 #!/bin/bash
-# usage: snapt.sh t1 t2 ... -> contact sheet
-OUT=/tmp/claude-0/-home-user-agency/61329949-73f4-5d89-8eab-27afc048e576/scratchpad/snaps
+# contact sheet of frames: kit/snapt.sh <episodeDir> <outDir> t1 t2 …
+KIT=$(dirname "$0"); EP=$1; OUT=$2; shift 2; mkdir -p "$OUT"
 args=(); for t in "$@"; do args+=("renderAt($t)" "$OUT/f_$t.jpg"); done
-node snap.js "${args[@]}"
+node "$KIT/snap.js" "$EP" "${args[@]}"
 files=(); for t in "$@"; do files+=("$OUT/f_$t.jpg"); done
 python3 - "$OUT/contact.jpg" "${files[@]}" <<'PY'
 import sys
@@ -13,3 +13,4 @@ for i,f in enumerate(fs):
     im=Image.open(f).resize((tw,th)); x=(i%cols)*tw; y=(i//cols)*(th+30); sheet.paste(im,(x,y+30)); d.text((x+8,y+8),f.split('f_')[1],fill='black')
 sheet.save(out,quality=85)
 PY
+echo "$OUT/contact.jpg"

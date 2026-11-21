@@ -1,10 +1,13 @@
+"""Align script lines to the VO by its pauses (fallback when word-level transcription is unavailable).
+usage: cd <episode>/vo && python3 ../../../kit/align.py   (reads script_compact.txt + vo.wav → timing.json, prints T[] starts)"""
 import re,subprocess,json
 lines=[re.sub(r'\[[^\]]*\]','',l).strip() for l in open('script_compact.txt') if l.strip()]
 out=subprocess.run(['ffmpeg','-hide_banner','-i','vo.wav','-af','silencedetect=noise=-38dB:d=0.25','-f','null','-'],capture_output=True,text=True).stderr
 st=[float(x) for x in re.findall(r'silence_start: ([\d.]+)',out)]; en=[float(x) for x in re.findall(r'silence_end: ([\d.]+)',out)]
 sil=[( (a+b)/2,b-a) for a,b in zip(st,en)]
 speech_start=en[0] if st[0]<0.05 else 0.0
-end=st[-1] if len(st)>len(en) else 139.2
+dur=float(subprocess.run(['ffprobe','-v','error','-show_entries','format=duration','-of','csv=p=0','vo.wav'],capture_output=True,text=True).stdout)
+end=st[-1] if len(st)>len(en) else dur
 L=[len(l) for l in lines]; tot=sum(L)
 # DP alignment: choose boundaries among silences monotonic, cost = |expected - silence|, prefer longer silences
 import itertools
@@ -27,3 +30,4 @@ times=[speech_start]+bounds+[end]
 res=[{'i':i,'start':round(times[i],2),'end':round(times[i+1],2),'text':lines[i]} for i in range(len(lines))]
 json.dump(res,open('timing.json','w'),ensure_ascii=False,indent=1)
 for r in res: print(f"{r['i']:2d} {r['start']:6.2f}-{r['end']:6.2f} exp~ {r['text'][:50]}")
+print('T =', [r['start'] for r in res] + [round(end, 2)])
