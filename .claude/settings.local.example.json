@@ -1,0 +1,6 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://YOUR-OMNIROUTE-SERVER",
+    "ANTHROPIC_AUTH_TOKEN": "YOUR-OMNIROUTE-KEY"
+  }
+}

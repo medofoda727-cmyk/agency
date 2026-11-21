@@ -82,3 +82,18 @@ src/
 ```
 
 The language choice is remembered. Visitors whose browser is set to Arabic are sent to `/ar/` automatically. Motion is turned off for visitors who prefer reduced motion.
+
+## Using Claude Code through OmniRoute
+
+To send Claude Code requests through your OmniRoute server instead of directly to Anthropic:
+
+1. Copy `.claude/settings.local.example.json` to `.claude/settings.local.json`. This file is gitignored, so your key is never committed.
+2. Replace `YOUR-OMNIROUTE-SERVER` with your server's address and `YOUR-OMNIROUTE-KEY` with your OmniRoute key.
+3. Restart Claude Code.
+
+You can also export the same two variables in your shell instead:
+
+```sh
+export ANTHROPIC_BASE_URL=http://YOUR-OMNIROUTE-SERVER
+export ANTHROPIC_AUTH_TOKEN=YOUR-OMNIROUTE-KEY
+```
