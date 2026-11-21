@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { getDictionary, type Lang } from "@/content/dictionary";
+import { asset } from "@/lib/base";
 
 function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
   const opacity = useTransform(progress, range, [0.16, 1]);
@@ -30,7 +31,7 @@ export function About({ lang }: { lang: Lang }) {
           </h2>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/brand/logo-mark.webp"
+            src={asset("/brand/logo-mark.webp")}
             alt=""
             aria-hidden="true"
             loading="lazy"

@@ -4,6 +4,7 @@ import { getDictionary, langPath, type Lang } from "@/content/dictionary";
 import { siteConfig } from "@/content/site";
 import { publishedItems } from "@/content/portfolio";
 import { thumbnailFor } from "@/lib/media";
+import { asset, basePath } from "@/lib/base";
 
 export const viewport: Viewport = {
   themeColor: "#09090a",
@@ -37,17 +38,17 @@ export function buildMetadata(lang: Lang): Metadata {
       description: t.meta.description,
       locale: lang === "ar" ? "ar_EG" : "en_US",
       alternateLocale: lang === "ar" ? "en_US" : "ar_EG",
-      images: [{ url: "/brand/og.jpg", width: 1200, height: 630, alt: t.meta.ogAlt }],
+      images: [{ url: `${siteConfig.url}/brand/og.jpg`, width: 1200, height: 630, alt: t.meta.ogAlt }],
     },
     twitter: {
       card: "summary_large_image",
       title: t.meta.title,
       description: t.meta.description,
-      images: ["/brand/og.jpg"],
+      images: [`${siteConfig.url}/brand/og.jpg`],
     },
     icons: {
-      icon: [{ url: "/icon.png", type: "image/png" }],
-      apple: "/brand/apple-icon.png",
+      icon: [{ url: asset("/icon.png"), type: "image/png" }],
+      apple: asset("/brand/apple-icon.png"),
     },
     robots: { index: true, follow: true },
     formatDetection: { telephone: false },
@@ -119,7 +120,7 @@ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.ad
 ${
   lang === "en"
     ? `var p=localStorage.getItem('foda-lang');if(!p&&(navigator.language||'').toLowerCase().indexOf('ar')===0){p='ar'}
-if(p==='ar'&&location.pathname==='/'){d.classList.add('skip-intro');location.replace('/ar/'+location.hash)}`
+var b='${basePath}';if(p==='ar'&&(location.pathname===b+'/'||location.pathname===b)){d.classList.add('skip-intro');location.replace(b+'/ar/'+location.hash)}`
     : ""
 }}catch(e){}})();`;
 

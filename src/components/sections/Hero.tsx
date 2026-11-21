@@ -2,7 +2,7 @@ import { ArrowDown } from "lucide-react";
 import { getDictionary, type Lang } from "@/content/dictionary";
 import { siteConfig, whatsappLink } from "@/content/site";
 import { publishedItems } from "@/content/portfolio";
-import { thumbnailFor } from "@/lib/media";
+import { local, thumbnailFor } from "@/lib/media";
 import { Thumb } from "@/components/media/Thumb";
 import { Diamond, WhatsAppIcon } from "@/components/icons";
 import { LocalTime } from "@/components/sections/LocalTime";
@@ -27,7 +27,7 @@ export function Hero({ lang }: { lang: Lang }) {
         <div className="absolute -start-[20%] -top-[30%] h-[80vh] w-[80vw] rounded-full bg-[radial-gradient(closest-side,rgb(201_163_91/0.13),transparent)] blur-2xl" />
         {bgVideo ? (
           <>
-            <video className="absolute inset-0 size-full object-cover opacity-40" src={bgVideo} autoPlay muted loop playsInline preload="metadata" />
+            <video className="absolute inset-0 size-full object-cover opacity-40" src={local(bgVideo)} autoPlay muted loop playsInline preload="metadata" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/30" />
           </>
         ) : (

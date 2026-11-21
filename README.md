@@ -11,6 +11,14 @@ npm run build    # static site → ./out  (upload anywhere: Netlify, Vercel, Clo
 npm run lint
 ```
 
+## Hosting
+
+- **GitHub Pages (automatic):** every push to `main` builds and publishes the site to
+  `https://medofoda727-cmyk.github.io/agency/` (workflow: `.github/workflows/deploy-pages.yml`).
+  One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
+- **Vercel / Netlify / custom domain:** import the repo with the default settings. No base path is needed.
+  If you host under a sub-path, set `NEXT_PUBLIC_BASE_PATH` (e.g. `/agency`).
+
 ## Where to edit things
 
 All content lives in `src/content/`. You never need to touch the layout components to update the site.

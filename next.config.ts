@@ -6,6 +6,8 @@ import type { NextConfig } from "next";
  */
 const nextConfig: NextConfig = {
   output: "export",
+  // Set NEXT_PUBLIC_BASE_PATH (e.g. "/agency") when hosting under a sub-path such as GitHub Pages.
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || undefined,
   trailingSlash: true,
   images: { unoptimized: true },
   poweredByHeader: false,

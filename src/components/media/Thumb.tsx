@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { asset } from "@/lib/base";
 
 /**
  * Lazy thumbnail with an art-directed fallback (never a broken image).
@@ -44,7 +45,7 @@ export function Thumb({
       {state !== "ok" && label && (
         <div className="absolute inset-0 grid place-items-center p-4 text-center" aria-hidden="true">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo-mark-sm.webp" alt="" className="w-[22%] max-w-14 opacity-25" />
+          <img src={asset("/brand/logo-mark-sm.webp")} alt="" className="w-[22%] max-w-14 opacity-25" />
         </div>
       )}
       {src && state !== "error" && (
