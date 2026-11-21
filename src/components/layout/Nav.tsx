@@ -6,6 +6,7 @@ import { getDictionary, langPath, type Lang } from "@/content/dictionary";
 import { siteConfig, whatsappLink } from "@/content/site";
 import { WhatsAppIcon, FacebookIcon, InstagramIcon } from "@/components/icons";
 import { lockScroll, scrollToId } from "@/components/providers/SmoothScroll";
+import { asset } from "@/lib/base";
 
 const SECTIONS = ["top", "work", "about", "contact"] as const;
 type SectionId = (typeof SECTIONS)[number];
@@ -75,7 +76,7 @@ export function Nav({ lang }: { lang: Lang }) {
   };
 
   const other: Lang = lang === "en" ? "ar" : "en";
-  const switchHref = `${langPath(other)}${active !== "top" ? `#${active}` : ""}`;
+  const switchHref = `${asset(langPath(other))}${active !== "top" ? `#${active}` : ""}`;
   const remember = () => {
     try {
       localStorage.setItem("foda-lang", other);
@@ -92,7 +93,7 @@ export function Nav({ lang }: { lang: Lang }) {
         <div className="mx-auto flex h-[var(--nav-h)] max-w-[1920px] items-center justify-between gap-6 px-[var(--gutter)]">
           <a href="#top" onClick={go("top")} className="group flex items-center gap-3" aria-label={`${siteConfig.name} — ${t.nav.home}`}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/brand/logo-mark-sm.webp" alt="" width={112} height={101} className="h-8 w-auto transition-transform duration-700 group-hover:-rotate-6" />
+            <img src={asset("/brand/logo-mark-sm.webp")} alt="" width={112} height={101} className="h-8 w-auto transition-transform duration-700 group-hover:-rotate-6" />
             <span className="font-latin flex items-baseline gap-1.5 text-[0.95rem] font-semibold tracking-[0.2em]" dir="ltr">
               FODA
               <span className="hidden text-[0.62rem] font-medium tracking-[0.28em] text-mute sm:inline">AGENCY</span>

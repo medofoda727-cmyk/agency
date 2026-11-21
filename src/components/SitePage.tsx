@@ -11,6 +11,7 @@ import { Work } from "@/components/sections/Work";
 import { About } from "@/components/sections/About";
 import { Stats } from "@/components/sections/Stats";
 import { Contact } from "@/components/sections/Contact";
+import { asset } from "@/lib/base";
 
 export function SitePage({ lang }: { lang: Lang }) {
   const t = getDictionary(lang);
@@ -19,7 +20,7 @@ export function SitePage({ lang }: { lang: Lang }) {
       <SmoothScroll />
       <div className="preloader" aria-hidden="true">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/brand/logo-mark.webp" alt="" className="preloader__mark" width={360} height={325} />
+        <img src={asset("/brand/logo-mark.webp")} alt="" className="preloader__mark" width={360} height={325} />
         <span className="preloader__bar" />
       </div>
       <div className="grain" aria-hidden="true" />

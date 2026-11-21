@@ -1,4 +1,8 @@
 import type { AspectRatio, PortfolioItem } from "@/content/portfolio";
+import { asset } from "@/lib/base";
+
+/** Root-relative local files ("/work/a.jpg") get the base path; full URLs pass through. */
+export const local = (src: string) => (src.startsWith("/") && !src.startsWith("//") ? asset(src) : src);
 
 export type ResolvedVideo =
   | { kind: "drive"; id: string; embed: string }
@@ -28,13 +32,13 @@ export function resolveVideo(url?: string): ResolvedVideo {
   if (vimeo)
     return { kind: "vimeo", id: vimeo[1], embed: `https://player.vimeo.com/video/${vimeo[1]}?autoplay=1&title=0&byline=0&portrait=0` };
 
-  return { kind: "file", src: u };
+  return { kind: "file", src: local(u) };
 }
 
 /** Best-effort thumbnail: explicit > first image > derived from the video host. */
 export function thumbnailFor(item: Pick<PortfolioItem, "thumbnail" | "images" | "videoUrl">, width = 720): string | undefined {
-  if (item.thumbnail) return item.thumbnail;
-  if (item.images?.length) return item.images[0];
+  if (item.thumbnail) return local(item.thumbnail);
+  if (item.images?.length) return local(item.images[0]);
   const v = resolveVideo(item.videoUrl);
   if (v.kind === "drive") return `https://drive.google.com/thumbnail?id=${v.id}&sz=w${width}`;
   if (v.kind === "youtube") return `https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`;

@@ -2,6 +2,7 @@ import { ArrowUp } from "lucide-react";
 import { getDictionary, type Lang } from "@/content/dictionary";
 import { siteConfig, whatsappLink } from "@/content/site";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon } from "@/components/icons";
+import { asset } from "@/lib/base";
 
 export function Footer({ lang }: { lang: Lang }) {
   const t = getDictionary(lang);
@@ -19,7 +20,7 @@ export function Footer({ lang }: { lang: Lang }) {
       <div className="mx-auto grid max-w-[1920px] gap-12 px-[var(--gutter)] md:grid-cols-12">
         <div className="md:col-span-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/logo-full.webp" alt={siteConfig.nameAr} width={360} height={382} loading="lazy" className="h-auto w-24" />
+          <img src={asset("/brand/logo-full.webp")} alt={siteConfig.nameAr} width={360} height={382} loading="lazy" className="h-auto w-24" />
           <p className="mt-6 text-sm text-mute">
             {siteConfig.name} — {t.footer.tagline}
           </p>

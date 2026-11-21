@@ -15,7 +15,7 @@ import { Play, Plus, Minus } from "lucide-react";
 import { getDictionary, type Lang } from "@/content/dictionary";
 import { categories, type CategoryId } from "@/content/categories";
 import { publishedItems, type PortfolioItem } from "@/content/portfolio";
-import { ratioValue, thumbnailFor, thumbnailSrcSet } from "@/lib/media";
+import { local, ratioValue, thumbnailFor, thumbnailSrcSet } from "@/lib/media";
 import { Thumb } from "@/components/media/Thumb";
 import { useVideoModal } from "@/components/video/VideoModal";
 import { scrollToId } from "@/components/providers/SmoothScroll";
@@ -257,7 +257,7 @@ function Card({
         title,
         category,
         videoUrl: item.videoUrl,
-        images: item.images,
+        images: item.images?.map(local),
         ratio: item.type === "video" ? ratio : ratioValue(item.aspectRatio ?? "4:5"),
       },
       e.currentTarget,
@@ -303,7 +303,7 @@ function Card({
             {item.previewUrl && (
               <video
                 ref={previewRef}
-                src={item.previewUrl}
+                src={local(item.previewUrl)}
                 muted
                 loop
                 playsInline
