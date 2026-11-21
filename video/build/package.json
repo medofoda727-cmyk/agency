@@ -1,0 +1,16 @@
+{
+  "name": "foda-mahmoud-film",
+  "version": "1.0.0",
+  "description": "Procedural animation, sound design and music for the Foda Agency storytelling reel",
+  "scripts": {
+    "render": "node render.js 4 frames 0 143",
+    "sound": "python3 sound.py && python3 mix.py"
+  },
+  "dependencies": {
+    "@fontsource/alexandria": "^5.3.0",
+    "@fontsource/aref-ruqaa": "^5.3.0",
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/inter-tight": "^5.3.0"
+  },
+  "private": true
+}

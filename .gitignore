@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# video production intermediates
+/video/build/frames/
+/video/build/node_modules/
+/video/build/*.wav
+/video/build/*.log
+/video/build/ffmpeg2pass*
