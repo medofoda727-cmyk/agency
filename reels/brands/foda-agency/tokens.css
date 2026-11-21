@@ -1,0 +1,40 @@
+/* Foda Agency tokens. Load after /core/lib/base.css. Colours sampled from assets/logo-original.jpg. */
+
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-arabic-400-normal.woff2") format("woff2"); font-weight: 400; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-arabic-700-normal.woff2") format("woff2"); font-weight: 700; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-arabic-800-normal.woff2") format("woff2"); font-weight: 800; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-arabic-900-normal.woff2") format("woff2"); font-weight: 900; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-latin-400-normal.woff2") format("woff2"); font-weight: 400; unicode-range: U+0000-00FF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-latin-700-normal.woff2") format("woff2"); font-weight: 700; unicode-range: U+0000-00FF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-latin-800-normal.woff2") format("woff2"); font-weight: 800; unicode-range: U+0000-00FF; }
+@font-face { font-family: "Alexandria"; src: url("/brands/foda-agency/assets/fonts/alexandria-latin-900-normal.woff2") format("woff2"); font-weight: 900; unicode-range: U+0000-00FF; }
+@font-face { font-family: "Cairo"; src: url("/brands/foda-agency/assets/fonts/cairo-arabic-wght-normal.woff2") format("woff2"); font-weight: 200 1000; unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF; }
+@font-face { font-family: "Cairo"; src: url("/brands/foda-agency/assets/fonts/cairo-latin-wght-normal.woff2") format("woff2"); font-weight: 200 1000; unicode-range: U+0000-00FF; }
+
+:root {
+  --bg: #26272b;          /* charcoal, darkest of the logo background */
+  --bg-2: #2e2f34;        /* charcoal, logo background median: cards */
+  --bg-3: #3a3b41;        /* card borders, chips */
+  --ink: #f4efe6;         /* warm white text */
+  --ink-dim: #a7a39b;
+  --accent: #e8bc66;      /* light gold: highlights, key words */
+  --gold: #b39043;        /* gold median */
+  --gold-deep: #653f0d;   /* gold shadow */
+  --gold-grad: linear-gradient(180deg, #f7dc93 0%, #e8bc66 35%, #b39043 70%, #8a6420 100%);
+
+  --font-display: "Alexandria", "Cairo", sans-serif;
+  --font-body: "Cairo", "Alexandria", sans-serif;
+
+  --caption-font: var(--font-display);
+  --caption-accent: var(--accent);
+  --caption-size: 64px;
+}
+
+.display { font-family: var(--font-display); font-weight: 800; line-height: 1.25; }
+.hook { font-size: 96px; }
+.headline { font-size: 76px; }
+.caption { font-size: 52px; font-weight: 700; line-height: 1.4; }
+.support { font-size: 42px; font-weight: 600; line-height: 1.45; }
+.fine { font-size: 28px; line-height: 1.4; opacity: .75; }
+.hl { color: var(--accent); }
+.gold-text { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }

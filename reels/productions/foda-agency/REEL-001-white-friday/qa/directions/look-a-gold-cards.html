@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Style frame A: gold cards on charcoal</title>
+<link rel="stylesheet" href="/core/lib/base.css">
+<link rel="stylesheet" href="/brands/foda-agency/tokens.css">
+<style>
+  #stage { background: radial-gradient(120% 70% at 50% 35%, #34353b 0%, var(--bg) 60%, #1d1e21 100%); color: var(--ink); font-family: var(--font-body); }
+  .dots { position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.06) 2px, transparent 2px); background-size: 48px 48px; mask-image: radial-gradient(80% 60% at 50% 40%, #000 30%, transparent 80%); }
+  .scene { position: absolute; inset: 0; }
+  .wrap { position: absolute; left: 6%; right: 11%; top: 11.5%; bottom: 22%; display: flex; flex-direction: column; align-items: center; }
+  .pill { display: inline-flex; gap: 14px; align-items: center; padding: 12px 26px; border-radius: 999px; background: var(--bg-2); border: 2px solid var(--bg-3); font: 700 30px var(--font-display); color: var(--ink-dim); }
+  .pill .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 16px var(--accent); }
+  .pill b { color: var(--accent); }
+  .ticks { display: flex; gap: 10px; margin-top: 18px; } .ticks i { width: 34px; height: 6px; border-radius: 3px; background: var(--bg-3); } .ticks i.on { background: var(--accent); }
+  h1 { font: 900 128px/1.15 var(--font-display); margin-top: 46px; text-align: center; }
+  h2 { font: 800 92px/1.2 var(--font-display); margin-top: 40px; text-align: center; }
+  .u { position: relative; color: var(--accent); } .u::after { content: ""; position: absolute; right: 10%; left: 10%; bottom: -10px; height: 10px; border-radius: 5px; background: var(--accent); }
+  .card { background: linear-gradient(180deg, #35363c, #2b2c31); border: 2px solid #44454c; border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06); }
+  .cal { width: 420px; margin-top: 70px; padding: 30px; text-align: center; transform: rotate(-4deg); }
+  .cal .top { height: 70px; margin: -30px -30px 24px; border-radius: 32px 32px 0 0; background: var(--gold-grad); display: flex; align-items: center; justify-content: center; font: 800 34px var(--font-display); color: #2a1d06; direction: ltr; }
+  .cal .n { font: 900 220px/1 var(--font-display); } .cal .d { font: 700 46px var(--font-display); color: var(--ink-dim); }
+  .tag { position: absolute; padding: 16px 26px; font: 700 34px var(--font-display); }
+  .tag.a { left: 7%; top: 47%; transform: rotate(6deg); } .tag.b { right: 9%; top: 56%; transform: rotate(-5deg); }
+  .tag s { color: var(--ink-dim); } .tag em { font-style: normal; color: var(--accent); }
+  .sub { position: absolute; left: 6%; right: 11%; bottom: 25%; text-align: center; font: 800 52px/1.45 var(--font-display); text-shadow: 0 4px 18px rgba(0,0,0,.6); }
+  .brand { position: absolute; bottom: 12.5%; left: 0; right: 0; display: flex; justify-content: center; }
+  .brand .pill { padding: 10px 24px 10px 14px; font-size: 26px; } .brand img { height: 44px; }
+  .list { width: 100%; margin-top: 50px; padding: 36px 40px; display: flex; flex-direction: column; gap: 22px; }
+  .row { display: flex; align-items: center; gap: 22px; font: 700 46px var(--font-display); padding: 18px 22px; border-radius: 22px; background: rgba(255,255,255,.03); border: 2px solid #3d3e45; }
+  .row .ic { width: 64px; height: 64px; flex: none; border-radius: 18px; background: var(--gold-grad); display: grid; place-items: center; color: #2a1d06; font: 900 36px var(--font-display); }
+  .price { margin-top: 40px; display: flex; align-items: baseline; gap: 18px; padding: 22px 48px; border-radius: 30px; background: var(--gold-grad); color: #24180a; box-shadow: 0 20px 60px rgba(232,188,102,.25); }
+  .price b { font: 900 110px/1 var(--font-display); } .price span { font: 800 48px var(--font-display); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="dots"></div>
+
+  <!-- Scene 1: the hook -->
+  <div class="scene" id="s1">
+    <div class="wrap">
+      <div class="pill"><span class="dot"></span>White Friday <b>2026</b></div>
+      <h1>12 يوم <span class="u">بس</span>…</h1>
+      <div class="card cal"><div class="top">WHITE FRIDAY</div><div class="n">12</div><div class="d">يوم عروض</div></div>
+    </div>
+    <div class="card tag a">2 ريلز بـ <em>1000 ج</em> بدل <s>1400</s></div>
+    <div class="card tag b">خصم <em>1000 ج</em></div>
+    <div class="sub">ممكن يغيّروا شكل <span class="hl">تسويقك</span> لسنة كاملة!</div>
+    <div class="brand"><div class="pill"><img src="/brands/foda-agency/assets/logo-mark.png" alt="">Foda Agency</div></div>
+  </div>
+
+  <!-- Scene 2: offer 1 -->
+  <div class="scene" id="s2">
+    <div class="wrap">
+      <div class="pill"><span class="dot"></span>العرض <b>1 / 3</b></div>
+      <div class="ticks"><i class="on"></i><i></i><i></i></div>
+      <h2>باكيدج <span class="u">المدرسين</span></h2>
+      <div class="card list">
+        <div class="row"><span class="ic">✓</span>تصوير ريلز للمراجعة</div>
+        <div class="row"><span class="ic">✓</span>تصميم سوشيال ميديا</div>
+        <div class="row"><span class="ic">✓</span>غلاف الملزمة</div>
+      </div>
+      <div class="price"><b>1000</b><span>جنيه بس</span></div>
+    </div>
+    <div class="sub">كل ده بـ <span class="hl">ألف جنيه</span> بس!</div>
+    <div class="brand"><div class="pill"><img src="/brands/foda-agency/assets/logo-mark.png" alt="">Foda Agency</div></div>
+  </div>
+</div>
+<script src="/core/node_modules/gsap/dist/gsap.min.js"></script>
+<script src="/core/lib/runtime.js"></script>
+<script>
+  const tl = Studio.setup({ width: 1080, height: 1920, fps: 30, duration: 2 });
+  tl.set("#s2", { autoAlpha: 0 }, 0).set("#s1", { autoAlpha: 0 }, 1).set("#s2", { autoAlpha: 1 }, 1);
+</script>
+</body>
+</html>

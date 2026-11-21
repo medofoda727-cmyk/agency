@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<title>Style frame B: glass cards on glow</title>
+<link rel="stylesheet" href="/core/lib/base.css">
+<link rel="stylesheet" href="/brands/foda-agency/tokens.css">
+<style>
+  #stage { background: #0d0d14; color: var(--ink); font-family: var(--font-body); }
+  .glow { position: absolute; border-radius: 50%; filter: blur(140px); opacity: .55; }
+  .g1 { width: 900px; height: 900px; background: #3b2a8a; left: -300px; top: 500px; }
+  .g2 { width: 800px; height: 800px; background: #a87a22; right: -320px; top: 1000px; opacity: .45; }
+  .g3 { width: 700px; height: 700px; background: #1d3f8f; right: -200px; top: -200px; opacity: .4; }
+  .scene { position: absolute; inset: 0; }
+  .glass { background: linear-gradient(160deg, rgba(255,255,255,.10), rgba(255,255,255,.03)); border: 2px solid rgba(255,255,255,.12); border-radius: 36px; box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15); backdrop-filter: blur(18px); }
+  .bar { position: absolute; top: 11.5%; left: 6%; right: 11%; height: 96px; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; direction: ltr; }
+  .bar .lbl { font: 700 24px var(--font-display); letter-spacing: .2em; color: var(--ink-dim); }
+  .bar .slots { display: flex; gap: 14px; } .bar .slot { width: 56px; height: 56px; border-radius: 16px; border: 2px solid rgba(255,255,255,.14); display: grid; place-items: center; font: 800 26px var(--font-display); color: var(--ink-dim); }
+  .bar .slot.on { background: var(--gold-grad); color: #24180a; border-color: transparent; box-shadow: 0 0 24px rgba(232,188,102,.5); }
+  .bar .cnt { font: 800 30px var(--font-display); color: var(--ink-dim); } .bar .cnt b { color: var(--accent); }
+  .wrap { position: absolute; left: 6%; right: 11%; top: 19%; bottom: 22%; display: flex; flex-direction: column; align-items: center; }
+  .big { font: 900 300px/1 var(--font-display); direction: ltr; margin-top: 40px; }
+  h1 { font: 900 116px/1.2 var(--font-display); text-align: center; margin-top: 10px; }
+  h2 { font: 800 84px/1.25 var(--font-display); text-align: center; margin-top: 6px; }
+  .num { font: 900 150px/1 var(--font-display); direction: ltr; align-self: flex-end; margin-top: 30px; }
+  .num small { display: block; font: 700 24px var(--font-display); letter-spacing: .25em; color: var(--ink-dim); margin-bottom: 10px; }
+  .logo { margin-top: 50px; width: 340px; }
+  .card { width: 100%; margin-top: 36px; padding: 34px 38px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+  .chip { padding: 16px 28px; border-radius: 999px; font: 700 40px var(--font-display); background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.12); }
+  .price { margin-top: 30px; text-align: center; font: 900 120px/1 var(--font-display); }
+  .price span { font: 800 46px var(--font-display); color: var(--ink); -webkit-text-fill-color: var(--ink); }
+  .cap { position: absolute; left: 50%; transform: translateX(-50%); bottom: 24%; padding: 18px 40px; border-radius: 999px; font: 800 48px var(--font-display); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+
+  <div class="glass bar">
+    <span class="lbl">WHITE FRIDAY</span>
+    <div class="slots"><span class="slot on" id="o1">1</span><span class="slot" id="o2">2</span><span class="slot" id="o3">3</span></div>
+    <span class="cnt" id="cnt"><b>0</b>/3</span>
+  </div>
+
+  <!-- Scene 1: the hook -->
+  <div class="scene" id="s1">
+    <div class="wrap">
+      <div class="big gold-text">12</div>
+      <h1>يوم <span class="gold-text">بس…</span></h1>
+      <img class="logo" src="/brands/foda-agency/assets/logo-mark.png" alt="">
+    </div>
+    <div class="glass cap">ممكن يغيّروا شكل <span class="hl">تسويقك</span> لسنة!</div>
+  </div>
+
+  <!-- Scene 2: offer 1 -->
+  <div class="scene" id="s2">
+    <div class="wrap">
+      <div class="num gold-text"><small>OFFER</small>01</div>
+      <h2>باكيدج <span class="gold-text">المدرسين</span></h2>
+      <div class="glass card">
+        <div class="chips"><span class="chip">🎬 ريلز للمراجعة</span><span class="chip">🎨 سوشيال ميديا</span><span class="chip">📘 غلاف الملزمة</span></div>
+        <div class="price gold-text">1000 <span>جنيه بس</span></div>
+      </div>
+    </div>
+    <div class="glass cap">كل ده بـ <span class="hl">ألف جنيه</span> بس!</div>
+  </div>
+</div>
+<script src="/core/node_modules/gsap/dist/gsap.min.js"></script>
+<script src="/core/lib/runtime.js"></script>
+<script>
+  const tl = Studio.setup({ width: 1080, height: 1920, fps: 30, duration: 2 });
+  tl.set("#s2", { autoAlpha: 0 }, 0).set("#s1", { autoAlpha: 0 }, 1).set("#s2", { autoAlpha: 1 }, 1)
+    .set("#cnt", { innerHTML: "<b>1</b>/3" }, 1);
+  gsap.set("#o1", { className: "slot" }); tl.set("#o1", { className: "slot on" }, 1);
+</script>
+</body>
+</html>
