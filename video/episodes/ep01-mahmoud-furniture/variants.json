@@ -1,0 +1,42 @@
+{
+  "full": {
+    "dur": 146.0
+  },
+  "short": {
+    "note": "lines kept: 0-5 hook/dream/problem/DIY · 11 directions · 13-14a agency+prices · 15-16 turn · 21-22 Foda + offer · 25 not tens of thousands · 27 CTA",
+    "edl": [
+      {
+        "a": 0.0,
+        "b": 25.39
+      },
+      {
+        "a": 50.23,
+        "b": 55.92,
+        "fade": 0.18
+      },
+      {
+        "a": 60.6,
+        "b": 67.05
+      },
+      {
+        "a": 71.95,
+        "b": 78.75,
+        "vshift": 0.36
+      },
+      {
+        "a": 100.14,
+        "b": 113.93,
+        "fade": 0.15
+      },
+      {
+        "a": 128.84,
+        "b": 132.95,
+        "vshift": 0.2
+      },
+      {
+        "a": 137.95,
+        "b": 146.0
+      }
+    ]
+  }
+}

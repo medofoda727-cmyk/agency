@@ -43,6 +43,16 @@ def sine_sweep(d, f0, f1, curve='exp'):
 
 # ── stereo buses ────────────────────────────────────────────
 SFX = MUS = None
+TMAP = None   # optional (authored_times, vo_times): cue times are written on the authored clock
+def set_time_map(old, new):
+    """map cue times from the authored picture clock onto the real VO clock (see episode.js setWarp)"""
+    global TMAP; TMAP = (np.asarray(old, float), np.asarray(new, float))
+def tm(t):
+    if TMAP is None: return t
+    o, n = TMAP
+    if t <= o[0]: return n[0] + (t - o[0])
+    if t >= o[-1]: return n[-1] + (t - o[-1])
+    return float(np.interp(t, o, n))
 def setup(dur, seed=7):
     """allocate the two stereo buses for an episode of `dur` seconds"""
     global DUR, N, SFX, MUS, rng
@@ -53,7 +63,7 @@ def place(bus, at, x, gain=1.0, pan=0.0):
     i = int(at * SR)
     if i >= N: return
     j = min(N, i + len(x)); bus[i:j] += x[:j - i] * gain
-def S(at, x, g=1.0, pan=0.0): place(SFX, at, x, g, pan)
+def S(at, x, g=1.0, pan=0.0): place(SFX, tm(at), x, g, pan)
 
 # ── SFX library ─────────────────────────────────────────────
 def whoosh(d=.6, f0=300, f1=4000, peak=.55, g=1.0):
@@ -154,7 +164,8 @@ def mf(m): return 440 * 2 ** ((m - 69) / 12)
 CH = {'Am': (45, [57, 60, 64, 69]), 'F': (41, [53, 57, 60, 64]), 'C': (48, [55, 60, 64, 67]), 'G': (43, [55, 59, 62, 67]),
       'Bb': (46, [58, 62, 65, 70]), 'E': (40, [52, 56, 59, 64]), 'Dm': (50, [62, 65, 69, 74]), 'Em': (40, [55, 59, 64, 67]),
       'Cmaj9': (48, [55, 59, 62, 64]), 'Fmaj7': (41, [57, 60, 64, 65])}
-def M(at, x, g=1.0, pan=0.0): place(MUS, at, x, g, pan)
+def M(at, x, g=1.0, pan=0.0): place(MUS, tm(at), x, g, pan)
+def _M(at, x, g=1.0, pan=0.0): place(MUS, at, x, g, pan)   # already on the VO clock
 def pluck(f, d=.9, g=1.0, bright=1.0):
     t = t_(d); x = np.sin(2 * np.pi * f * t) + .35 * bright * np.sin(2 * np.pi * 2 * f * t) * np.exp(-t * 6) + .12 * bright * np.sin(2 * np.pi * 3 * f * t) * np.exp(-t * 10)
     return x * env_ad(len(t), 60, 5.5) * g * .16
@@ -178,28 +189,29 @@ def hat(g=1.0, d=.05):
 def bell(f, d=2.5, g=1.0): return chime(f, d, g) * 1.2
 
 def section(a, b, prog, layers, arp='up', octave=0, swing=0.0, gain=1.0):
+    a, b = tm(a), tm(b)   # bounds follow the VO clock, bars keep strict tempo
     bar = 0; t0 = a
     while t0 < b - .05:
         name = prog[bar % len(prog)]; root, notes = CH[name]; d = min(BAR, b - t0)
-        if 'pad' in layers: M(t0, pad([n + octave for n in notes[:3]] + [notes[0] + 12 + octave], d + .5, layers['pad'] * gain))
+        if 'pad' in layers: _M(t0, pad([n + octave for n in notes[:3]] + [notes[0] + 12 + octave], d + .5, layers['pad'] * gain))
         if 'bass' in layers:
             for i in range(4 if layers.get('bass8') is None else 8):
                 st = t0 + i * (BEAT if layers.get('bass8') is None else BEAT / 2)
-                if st < b: M(st, bass(mf(root), (BEAT if layers.get('bass8') is None else BEAT / 2) * .95, layers['bass'] * gain))
+                if st < b: _M(st, bass(mf(root), (BEAT if layers.get('bass8') is None else BEAT / 2) * .95, layers['bass'] * gain))
         if 'pluck' in layers:
             seq = notes + [notes[1] + 12, notes[2] + 12, notes[3]] if arp == 'up' else [notes[0], notes[2], notes[1], notes[3], notes[2] + 12, notes[3], notes[1] + 12, notes[2]]
             for i in range(8):
                 st = t0 + i * BEAT / 2 + (swing * BEAT / 2 if i % 2 else 0)
-                if st < b: M(st, pluck(mf(seq[i % len(seq)] + 12 + octave), .9, layers['pluck'] * gain * (1 if i % 2 == 0 else .7)), 1.0, (-.35, .35)[i % 2])
+                if st < b: _M(st, pluck(mf(seq[i % len(seq)] + 12 + octave), .9, layers['pluck'] * gain * (1 if i % 2 == 0 else .7)), 1.0, (-.35, .35)[i % 2])
         for i in range(4):
             st = t0 + i * BEAT
             if st >= b: break
-            if 'kick' in layers and (layers.get('kick_half') is None or i % 2 == 0): M(st, kick(layers['kick'] * gain))
-            if 'clap' in layers and i % 2 == 1: M(st, clap(layers['clap'] * gain), 1.0, .1)
+            if 'kick' in layers and (layers.get('kick_half') is None or i % 2 == 0): _M(st, kick(layers['kick'] * gain))
+            if 'clap' in layers and i % 2 == 1: _M(st, clap(layers['clap'] * gain), 1.0, .1)
             if 'hat' in layers:
                 for h in range(2 if layers.get('hat16') is None else 4):
                     hs = st + h * BEAT / (2 if layers.get('hat16') is None else 4)
-                    if hs < b: M(hs, hat(layers['hat'] * gain * (1 if h % 2 else .6)), 1.0, .3)
+                    if hs < b: _M(hs, hat(layers['hat'] * gain * (1 if h % 2 else .6)), 1.0, .3)
         t0 += BAR; bar += 1
 
 # ── reverb / gates / output ──────────────────────────────────
@@ -217,7 +229,7 @@ def finish(gates=(), out_dir='.'):
     """reverb both buses, apply music gates [(a, b, fade)], write sfx.wav + music.wav"""
     global SFX, MUS
     SFX = reverb(SFX, 1.6, .18, 1); MUS = reverb(MUS, 2.8, .3, 2)
-    for g in gates: gate(MUS, *g)
+    for g in gates: gate(MUS, tm(g[0]), tm(g[1]), *g[2:])
     import os
     wavfile.write(os.path.join(out_dir, 'sfx.wav'), SR, SFX.astype(np.float32)); wavfile.write(os.path.join(out_dir, 'music.wav'), SR, MUS.astype(np.float32))
     print('peaks', np.abs(SFX).max(), np.abs(MUS).max())

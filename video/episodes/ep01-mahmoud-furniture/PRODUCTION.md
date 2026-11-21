@@ -1,6 +1,20 @@
 # EP01 · محمود ومعرض الأثاث — production notes
 
-**Final video:** `out/foda_mahmoud_story_9x16.mp4`: 1080×1920, 30 fps, 2:23, H.264 + AAC, loudness −14 LUFS (TikTok / Reels).
+**Deliverables (`out/`):**
+* `foda_mahmoud_story_full_9x16.mp4`: full film, 2:26, burned-in word-by-word captions
+* `foda_mahmoud_story_short_9x16.mp4`: cut-down, ~1:10, same story arc, burned-in captions
+* `captions_full.srt`, `captions_short.srt` (platform captions) · `post_caption.md` (post copy)
+
+All are 1080×1920, 30 fps, H.264 + AAC, loudness −14 LUFS (TikTok / Reels).
+
+### v2 fix: voice-over timing
+v1 trimmed the first 3 s of the voice over as "silence". That was a bad silence parse: it actually removed «محمود قرر يفتح معرض أثاث… كان عنده حلم». The pause-based line alignment was also up to ~2.8 s off around the hook, «هجيب مصمم» and «وبعدها يبدأ يشتغل…».
+v2 uses the **untrimmed** VO and **ElevenLabs word timestamps** (`vo/words_raw.json`, all 324 words match the script), with line starts snapped to real silences (`vo/timing_words.json`).
+The picture is still authored on the old clock (`T_AUTH`). `setWarp()` / `set_time_map()` map it line by line onto the real VO (`T_VO`), so each line's picture and SFX land on its actual words.
+
+### Short version (`variants.json` → `short`)
+Cuts only at sentence pauses, using the same performance (no new VO credits). Kept: hook, dream, problem, DIY, the four pulls (عروض / أسعار / منتجات / ؟), the agency and the prices, the turn («ابدأ صح»), Foda plus the content-production offer (16 فيديو · أقل من 10,000 جنيه), «مش لازم عشرات الآلاف», and the CTA.
+Dropped: the audience/message monologue, the designer/videographer beats, the drain, the 3 steps, the funnel, the full-management offer, and the «وإنت؟» lead-in. The full film still carries all of them.
 
 Everything in this film is generated: the voice by ElevenLabs, and every frame, sound effect and note of music by code (`../../kit/` plus this folder's `scenes_*.js` and `cues.py`). The series-wide rules are in `../../SERIES_BIBLE.md`. There is no live action, stock footage, clip-art, or real people. The only real asset is the Foda logo (`public/brand/logo-full.png`).
 

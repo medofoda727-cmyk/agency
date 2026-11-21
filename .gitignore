@@ -42,7 +42,7 @@ next-env.d.ts
 
 # video production intermediates
 /video/kit/node_modules/
-/video/episodes/*/frames/
+/video/episodes/*/frames*/
 /video/episodes/*/.page.html
 /video/episodes/*/*.wav
 /video/episodes/*/.x264*

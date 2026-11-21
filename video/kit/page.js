@@ -1,5 +1,5 @@
 // Builds the render page for an episode: kit scripts + fonts + the episode's own files.
-// Episode files loaded in order: episode.js, then scenes_*.js (alphabetical).
+// Episode files loaded in order: variants.json (inline), episode.js, captions_data.js, then scenes_*.js (alphabetical).
 const fs = require('fs'), path = require('path');
 const KIT = __dirname;
 function buildPage(epDir) {
@@ -13,11 +13,12 @@ function buildPage(epDir) {
     .concat([face('Ruqaa', 700, 'aref-ruqaa/files/aref-ruqaa-arabic-700-normal.woff2'), face('Inter Tight', 500, 'inter-tight/files/inter-tight-latin-500-normal.woff2'),
       face('Inter Tight', 800, 'inter-tight/files/inter-tight-latin-800-normal.woff2'), face('Inter Tight', 900, 'inter-tight/files/inter-tight-latin-900-normal.woff2'),
       face('Caveat', 700, 'caveat/files/caveat-latin-700-normal.woff2')]).join('\n');
-  const kitJs = ['logos.js', 'lib.js', 'character.js', 'props.js', 'core.js', 'fx.js', 'sheet.js'].map(rel);
-  const epJs = fs.existsSync(path.join(epDir, 'episode.js')) ? ['episode.js'] : [];
+  const kitJs = ['logos.js', 'lib.js', 'character.js', 'props.js', 'core.js', 'fx.js', 'captions.js', 'sheet.js'].map(rel);
+  const epJs = ['episode.js', 'captions_data.js'].filter(f => fs.existsSync(path.join(epDir, f)));
   epJs.push(...fs.readdirSync(epDir).filter(f => /^scenes_.*\.js$/.test(f)).sort());
   const html = `<!doctype html><html><head><meta charset="utf-8"><style>\n${fonts}\nhtml,body{margin:0;background:#000}canvas{display:block}\n</style></head><body>
 <canvas id="c" width="1080" height="1920"></canvas>
+<script>window.VARIANTS = ${fs.existsSync(path.join(epDir, 'variants.json')) ? fs.readFileSync(path.join(epDir, 'variants.json'), 'utf8') : 'null'};</script>
 ${kitJs.concat(epJs).map(s => `<script src="${s}"></script>`).join('\n')}
 <script>
 window.ready=(async()=>{

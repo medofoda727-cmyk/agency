@@ -116,6 +116,40 @@ function drawCity(t, o = {}) {
   ctx.restore();
 }
 
+// ── time warp: final (VO) clock → authored clock ─────────────
+let WARP = null;
+function setWarp(newT, oldT) { WARP = newT.map((n, i) => [n, oldT[i]]); }
+function toOld(t) {
+  if (!WARP) return t;
+  if (t <= WARP[0][0]) return WARP[0][1] + (t - WARP[0][0]);
+  for (let i = 1; i < WARP.length; i++) if (t <= WARP[i][0]) { const [n0, o0] = WARP[i - 1], [n1, o1] = WARP[i]; return o0 + (o1 - o0) * (t - n0) / (n1 - n0); }
+  const [n, o] = WARP[WARP.length - 1]; return o + (t - n);
+}
+// ── variants (full / cut-downs) ─────────────────────────────
+// edl segments {a, b, vshift?, fade?} are in VO clock; vshift moves the picture
+// (and SFX/music) against the voice, fade = cross-dissolve into the segment.
+function variantOf(name) { return (window.VARIANTS && VARIANTS[name]) || { dur: DUR }; }
+function variantDur(name) { const v = variantOf(name); return v.edl ? v.edl.reduce((s, e) => s + e.b - e.a, 0) : v.dur; }
+function edlLocate(v, t) {
+  if (!v.edl) return { tv: t, ta: t, k: -1, lt: t };
+  let acc = 0;
+  for (let k = 0; k < v.edl.length; k++) { const e = v.edl[k], d = e.b - e.a; if (t < acc + d || k === v.edl.length - 1) { const lt = t - acc; return { tv: e.a + lt + (e.vshift || 0), ta: e.a + lt, k, lt }; } acc += d; }
+}
+let XF = null;
+function renderFinal(t, name = 'full', captions = true) {
+  const v = variantOf(name), L = edlLocate(v, t);
+  const e = v.edl ? v.edl[L.k] : null;
+  if (e && e.fade && L.lt < e.fade && L.k > 0) {
+    // cross-dissolve from the end of the previous segment
+    const p = v.edl[L.k - 1];
+    if (!XF) XF = makeCanvas(W, H);
+    renderAt(toOld(p.b + (p.vshift || 0) + L.lt)); XF.getContext('2d').drawImage(cv, 0, 0);
+    renderAt(toOld(L.tv));
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1 - L.lt / e.fade; ctx.drawImage(XF, 0, 0); ctx.restore();
+  } else renderAt(toOld(L.tv));
+  if (captions && typeof CAPTIONS !== 'undefined') drawCaptions(L.ta, e ? e.a - .1 : -1e9, e ? e.b : 1e9);
+}
+
 // Rendering entry
 function initFilm() { }
 function renderAt(t) {
