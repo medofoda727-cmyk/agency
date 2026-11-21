@@ -1,0 +1,18 @@
+node_modules/
+.DS_Store
+**/qa/flagged/
+# Desk: renders made from the desk and what it has open (review.json stays tracked)
+**/qa/desk/
+desk/.state.json
+__pycache__/
+
+# Big media stays out of git
+*.mp4
+*.MP4
+*.mov
+*.MOV
+*.m4v
+*.webm
+*.mkv
+*.avi
+*.zip

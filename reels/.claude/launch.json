@@ -1,0 +1,15 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "desk",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "desk/server.mjs",
+        "--port",
+        "4100"
+      ],
+      "port": 4100
+    }
+  ]
+}
