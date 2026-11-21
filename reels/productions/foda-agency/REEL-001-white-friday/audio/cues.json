@@ -1,2 +1,244 @@
-{ "duration": 46.34,
-  "tracks": [ {"file": "vo.mp3", "role": "vo", "start": 0.3} ] }
+{
+ "duration": 46.34,
+ "tracks": [
+  {
+   "file": "vo.mp3",
+   "role": "vo",
+   "start": 0.3
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 0,
+   "volume": 0.4
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 2.9,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 3.15,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 3.4,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 4.273,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 4.723,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 7.44,
+   "volume": 0.18
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 7.74,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 9.18,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 11.26,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 12.62,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 13.74,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 15.18,
+   "volume": 0.42
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 16.273,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 16.773,
+   "volume": 0.2
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 16.923,
+   "volume": 0.2
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 18.54,
+   "volume": 0.38
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 19.73,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 20.22,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 22.3,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 23.047,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/stamp.wav",
+   "role": "sfx",
+   "start": 23.86,
+   "volume": 0.45
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 25.1,
+   "volume": 0.42
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 26.54,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 28.1,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 28.54,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 28.89,
+   "volume": 0.22
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 29.5,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 30.06,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 30.62,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 31.18,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 31.74,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 32.3,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/tick.wav",
+   "role": "sfx",
+   "start": 32.86,
+   "volume": 0.16
+  },
+  {
+   "file": "sfx/pop.wav",
+   "role": "sfx",
+   "start": 34.38,
+   "volume": 0.25
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 36.26,
+   "volume": 0.36
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 38.42,
+   "volume": 0.4
+  },
+  {
+   "file": "sfx/whoosh.wav",
+   "role": "sfx",
+   "start": 39.946,
+   "volume": 0.3
+  },
+  {
+   "file": "sfx/impact.wav",
+   "role": "sfx",
+   "start": 42.42,
+   "volume": 0.42
+  }
+ ]
+}

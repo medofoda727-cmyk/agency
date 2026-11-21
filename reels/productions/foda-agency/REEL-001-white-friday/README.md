@@ -11,7 +11,7 @@
 | Placement | organic (Instagram, TikTok, Facebook) — ❓ also paid? |
 | Look | A — gold cards on charcoal (owner asked for the video without picking; A was the recommendation) |
 | Engines | GSAP + HTML/CSS cards (UI-card motion graphics like the references) |
-| Sound | ElevenLabs VO only (eleven_v4, voice "Ahmed Yahia" rMheqEfwsIJckq2yCdb5, take 1 of 2). No music: the connected ElevenLabs connector has no music |
+| Sound | ElevenLabs VO (eleven_v4, voice "Ahmed Yahia" rMheqEfwsIJckq2yCdb5, take 1 of 2) + 39 synthesized SFX cues (v2). No music: the connected ElevenLabs connector has no music |
 | Voice / face | AI voice (disclosed) — no face so far: the logo and the offer cards carry the piece |
 | Approved by / date | Owner said "ابعتلي الفيديو" and "2 ريلز للمدرسين فقط", 2026-11-21 |
 
@@ -90,3 +90,10 @@ node core/render.mjs video productions/foda-agency/REEL-001-white-friday/composi
   productions/foda-agency/REEL-001-white-friday/export/REEL-001-ar.mp4 \
   --audio productions/foda-agency/REEL-001-white-friday/audio/mix.wav --workers 4
 ```
+
+## 7. v2 — sound effects (2026-11-21)
+
+- Owner asked for sound effects. ElevenLabs SFX generation was refused ("free generations are busy", nothing charged), so the kit is synthesized in code: `scripts/synth_sfx.py` → `audio/sfx/` (whoosh, pop, tick, impact, stamp; fixed seed, no licences). Checked by spectrogram, not by ear.
+- Cues from `audio/timing.json` → `audio/cues.json` (39 cues: whoosh on every cut, impact on each price, ticks on the checklist and service chips, stamp on "ادفع مقدّم").
+- Balance: voice -14.4 LUFS, effects -25.9 LUFS before the final normalisation (effects ~11.5 dB under the voice).
+- A first re-mux with `-shortest` cut the last 2 frames; the video was re-rendered with `--audio audio/mix.wav` instead.
