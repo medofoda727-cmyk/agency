@@ -4,16 +4,16 @@
 |---|---|
 | Brand | `brands/foda-agency/` |
 | Type | Reel |
-| Status | `storyboard (awaiting approval)` |
+| Status | `QA passed` — v1 sent to the owner 2026-11-21 |
 | Size | 1080×1920 (9:16) |
-| Frame rate / length | 30 fps · ~38 s |
+| Frame rate / length | 30 fps · 46.3 s |
 | Language | Arabic, general Egyptian dialect |
 | Placement | organic (Instagram, TikTok, Facebook) — ❓ also paid? |
-| Look | ❓ A (gold cards on charcoal) or B (glass on gold/purple glow): `qa/directions/` |
+| Look | A — gold cards on charcoal (owner asked for the video without picking; A was the recommendation) |
 | Engines | GSAP + HTML/CSS cards (UI-card motion graphics like the references) |
-| Sound | ElevenLabs VO (marketing voice, Egyptian) + light music bed |
+| Sound | ElevenLabs VO only (eleven_v4, voice "Ahmed Yahia" rMheqEfwsIJckq2yCdb5, take 1 of 2). No music: the connected ElevenLabs connector has no music |
 | Voice / face | AI voice (disclosed) — no face so far: the logo and the offer cards carry the piece |
-| Approved by / date | |
+| Approved by / date | Owner said "ابعتلي الفيديو" and "2 ريلز للمدرسين فقط", 2026-11-21 |
 
 ## 0. Idea and direction
 
@@ -75,3 +75,18 @@ Captions: big, word-lit in gold, one spoken phrase per page. Loop: the end "12" 
 2. The "2 ريلز بـ 1000 بدل 1400" line: is it only for teachers (as in the text) or for everyone?
 3. A face or real footage from the agency's shoots for the first 2 s? (strongest single upgrade)
 4. ElevenLabs: finish connecting the connector, or give an API key; then pick a voice.
+
+## 5. Delivery log (v1)
+
+- VO: `audio/vo.mp3` (ElevenLabs take 1, 44.6 s), word timings `audio/vo.words.json` (ElevenLabs Scribe; it returned the script text, so it is an alignment, not an independent check of pronunciation), scene timing `audio/timing.json`.
+- Mix: `audio/mix.wav` (-14 LUFS target). Export: `export/REEL-001-ar.mp4` (not in git: *.mp4 is ignored).
+- QA: `qa/report.md` all ✅ (30 fps CFR, h264/AAC, -14.9 LUFS, no black/frozen/flash). Motion: 5 single duplicate frames flagged (22.0, 23.5, 28.8, 32.0, 41.2 s) — not fixed in v1. `qa/text.md`: 0 fails; warnings for 36 px step pills and captions in the paid-Reels bottom zone (placement is organic).
+- Fixed during QA: brand pill under the Reels UI and too small (removed), opening price tags outside the organic safe zone, offer 3 empty for ~4 s (audience chips added), duplicate phone number on the end card.
+
+## 6. Rebuild
+
+```bash
+node core/render.mjs video productions/foda-agency/REEL-001-white-friday/composition/index.html \
+  productions/foda-agency/REEL-001-white-friday/export/REEL-001-ar.mp4 \
+  --audio productions/foda-agency/REEL-001-white-friday/audio/mix.wav --workers 4
+```
